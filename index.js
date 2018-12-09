@@ -8,10 +8,6 @@ const port = process.env.PORT || 3000;
 
 server.use(bodyParser.json());
 
-server.get('/', (req, res, next) => {
-    res.send("Welcome to the Muzika API");
-});
-
 server.get('/api', (req, res, next) => {
     res.send("Welcome to the Muzika API, to make use of the routes add /api to the end of the url in the address bar. Example: /api/genres");
 });
@@ -25,7 +21,7 @@ server.use('/api', require('./routes/v1/routes_songs_v1'));
 
 // Fix unused pages
 server.get('*', (req, res, next) => {
-    res.redirect('/');
+    res.redirect('/api');
 });
 
 server.listen(port, () => {
