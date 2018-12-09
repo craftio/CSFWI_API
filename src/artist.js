@@ -10,6 +10,13 @@ let ArtistSchema = new Schema({
     }]
 });
 
+function autoPopulate(){
+    this.populate('genres');
+};
+
+ArtistSchema.pre('find', autoPopulate());
+ArtistSchema.pre('findOne', autoPopulate());
+
 const Artist = mongoose.model('artist', ArtistSchema);
 
 module.exports = Artist;

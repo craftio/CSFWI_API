@@ -10,6 +10,12 @@ server.use('/', (req, res, next) => {
     next();
 });
 
+// CREATE
+server.post('/songs', (req, res) => {
+
+});
+
+// READ
 server.get('/songs', (req, res) => {
     const _name = req.body.name;
 
@@ -26,6 +32,16 @@ server.get('/songs', (req, res) => {
             res.json(error);
         }
     }
+});
+
+// UPDATE
+server.put('/songs/:id', (req, res) => {
+
+});
+
+// DELETE
+server.delete('/songs/:id', (req, res) => {
+    
 });
 
 // Check for null and/or undefined params.

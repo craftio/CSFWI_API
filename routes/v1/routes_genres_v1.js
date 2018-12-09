@@ -10,24 +10,6 @@ server.use('/', (req, res, next) => {
     next();
 });
 
-server.get('/genres', (req, res) => {
-    const _name = req.body.name;
-
-    if (NorU(_name)) {
-        try {
-            genreRepo.getGenresByName(_name, res);
-        } catch (error) {
-            res.json(error);
-        }
-    } else {
-        try {
-            genreRepo.getGenres(res);
-        } catch (error) {
-            res.json(error);
-        }
-    }
-});
-
 server.post('/genres', (req, res) => {
     const bodyParamArray = [
         req.body.name,
@@ -47,11 +29,28 @@ server.post('/genres', (req, res) => {
         if (_noru) {
             genreRepo.createGenre(bodyParamArray, res);
         } else {
-            // Change this.
-            res.json(new jsonModel("hi", "no", 200, "werkt nie"));
+            res.json(new jsonModel('/api/genres', 'POST', 500, 'Could not create genre due to possibly missing fields "name", "description", "origin" and "popularity".'));
         }
     } catch (error) {
         res.json(error);
+    }
+});
+
+server.get('/genres', (req, res) => {
+    const _name = req.body.name;
+
+    if (NorU(_name)) {
+        try {
+            genreRepo.getGenresByName(_name, res);
+        } catch (error) {
+            res.json(error);
+        }
+    } else {
+        try {
+            genreRepo.getGenres(res);
+        } catch (error) {
+            res.json(error);
+        }
     }
 });
 

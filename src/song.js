@@ -10,11 +10,18 @@ let SongSchema = new Schema({
     length_s: Number,
     releasedate: Date,
     bpm: Number,
-    genres: [{
+    genre: {
         type: Schema.Types.ObjectId,
         ref: 'genre'
-    }]
+    }
 });
+
+function autoPopulate(){
+    this.populate('artist genre');
+};
+
+SongSchema.pre('find', autoPopulate());
+SongSchema.pre('findOne', autoPopulate());
 
 const Song = mongoose.model('song', SongSchema);
 
