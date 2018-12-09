@@ -16,12 +16,13 @@ let SongSchema = new Schema({
     releasedate: Date
 });
 
-function autoPopulate(){
+var autoPopulate = function(next) {
     this.populate('artist genre');
+    next();
 };
 
-SongSchema.pre('find', autoPopulate());
-SongSchema.pre('findOne', autoPopulate());
+SongSchema.pre('find', autoPopulate);
+SongSchema.pre('findOne', autoPopulate);
 
 const Song = mongoose.model('song', SongSchema);
 
