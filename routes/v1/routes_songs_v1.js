@@ -12,7 +12,30 @@ server.use('/', (req, res, next) => {
 
 // CREATE
 server.post('/songs', (req, res) => {
+    const bodyParamArray = [
+        req.body.name,
+        req.body.length_s,
+        req.body.bpm,
+        req.body.genre,
+        req.body.artists
+    ];
 
+    let _noru = true;
+    bodyParamArray.forEach((param) => {
+        if (!NorU(param)) {
+            _noru = false;
+        }
+    });
+
+    try {
+        if (_noru) {
+            songRepo.createSong(bodyParamArray, res);
+        } else {
+            res.json(new jsonModel());
+        }
+    } catch (error) {
+        res.json(error);
+    }
 });
 
 // READ
