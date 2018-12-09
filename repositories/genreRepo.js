@@ -1,4 +1,4 @@
-const Genre = require('../src/genre');
+const Genre = require('../models/genre');
 const jsonModel = require('../models/jsonResponseModel');
 
 module.exports = class GenresRepo {

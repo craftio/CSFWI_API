@@ -10,6 +10,9 @@ server.use('/', (req, res, next) => {
     next();
 });
 
+/**
+ * Route for CREATE
+ */
 server.post('/artists', (req, res) => {
     const bodyParamArray = [
         req.body.name,
@@ -34,6 +37,9 @@ server.post('/artists', (req, res) => {
     }
 });
 
+/**
+ * Route for READ
+ */
 server.get('/artists', (req, res) => {
     const _name = req.body.name;
 
@@ -52,6 +58,9 @@ server.get('/artists', (req, res) => {
     }
 });
 
+/**
+ * Route for UPDATE
+ */
 server.put('/artists', (req, res) => {
     const bodyParamArray = [
         req.body.name,
@@ -64,9 +73,38 @@ server.put('/artists', (req, res) => {
             _noru = false;
         }
     });
+
+    try {
+        if (_noru) {
+            artistRepo.updateArtist(bodyParamArray, res);
+        } else {
+            res.json(new jsonModel());
+        }
+    } catch (error) {
+        res.json(error);
+    }
 });
 
-// Check for null and/or undefined params.
+/**
+ * Route for DELETE
+ */
+server.delete('/artists', (req, res) => {
+    const _name = req.body.name;
+
+    try {
+        artistRepo.deleteArtistByName(_name);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+/**
+ * Function to check if an object has any sort of definition other than a type (empty like " " is a definition).
+ *
+ * @param param
+ * @returns {boolean}
+ * @constructor
+ */
 function NorU(param) {
     if (param !== null && param !== undefined) {
         return true;

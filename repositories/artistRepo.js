@@ -1,4 +1,6 @@
-const Artist = require('../src/artist');
+const Artist = require('../models/artist');
+const Genre = require('../models/genre');
+
 const jsonModel = require('../models/jsonResponseModel');
 
 module.exports = class ArtistRepo {

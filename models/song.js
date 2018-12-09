@@ -3,17 +3,17 @@ const Schema = mongoose.Schema;
 
 let SongSchema = new Schema({
     name: String,
-    artists: [{
-        type: Schema.Types.ObjectId,
-        ref: 'artist'
-    }],
     length_s: Number,
-    releasedate: Date,
     bpm: Number,
     genre: {
         type: Schema.Types.ObjectId,
         ref: 'genre'
-    }
+    },
+    artists: [{
+        type: Schema.Types.ObjectId,
+        ref: 'artist'
+    }],
+    releasedate: Date
 });
 
 function autoPopulate(){
