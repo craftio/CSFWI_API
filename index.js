@@ -15,10 +15,10 @@ server.use(cors());
 
 //CORS headers
 server.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN || ANGULAR_LINK || 'http://localhost:4200');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN || 'http://localhost:4200');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.header('Access-Control-Allow-Credentials', true);
 
     if (req.method === 'OPTIONS') {
         res.status(200);
