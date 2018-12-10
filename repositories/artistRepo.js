@@ -32,6 +32,7 @@ module.exports = class ArtistRepo {
     static getArtists(res) {
         Artist.find()
             .then((artists) => {
+                /**
                 let artistArray = [];
                 for (let artist of artists) {
                     artistArray.push({
@@ -40,6 +41,8 @@ module.exports = class ArtistRepo {
                     })
                 }
                 res.status(200).json(new jsonModel('/api/artists', 'GET', 200, 'Successfully retrieved all artists', {'artists': artistArray}));
+                */
+                res.status(200).json(artists);
             })
             .catch(() => {
                 res.status(404).json(new jsonModel());

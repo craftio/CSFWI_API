@@ -39,6 +39,7 @@ module.exports = class SongRepo {
     static getSongs(res) {
         Song.find()
             .then((songs) => {
+                /**
                 let songArray = [];
                 for (let song of songs) {
                     songArray.push({
@@ -46,6 +47,8 @@ module.exports = class SongRepo {
                     })
                 }
                 res.status(200).json({'songs': songArray});
+                 */
+                res.status(200).json(songs);
             })
             .catch(() => {
                 res.status(404).json(new jsonModel());

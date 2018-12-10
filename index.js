@@ -7,7 +7,8 @@ let bodyParser = require('body-parser');
 let cors = require('cors');
 const port = process.env.PORT || 3000;
 
-const ANGULAR_LINK = 'https://btaks-csfwi-angular.herokuapp.com';
+const ANGULAR_LINK = process.env.ALLOW_ORIGIN || 'http://localhost:4200';
+
 
 server.use(bodyParser.json());
 
@@ -15,7 +16,7 @@ server.use(cors());
 
 //CORS headers
 server.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN || 'http://localhost:4200');
+    res.header('Access-Control-Allow-Origin', ANGULAR_LINK);
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.header('Access-Control-Allow-Credentials', true);
