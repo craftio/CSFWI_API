@@ -44,6 +44,7 @@ module.exports = class GenresRepo {
     static getGenres(res) {
         Genre.find()
             .then((genres) => {
+                /**
                 let genreArray = [];
                 for (let genre of genres) {
                     genreArray.push({
@@ -51,6 +52,8 @@ module.exports = class GenresRepo {
                     })
                 }
                 res.status(200).json({'genres': genreArray});
+                 */
+                res.status(200).json(genres);
             })
             .catch(() => {
                 res.status(404).json(new jsonModel());
