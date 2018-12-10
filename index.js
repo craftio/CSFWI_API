@@ -4,11 +4,14 @@ db.Connect();
 let express = require('express');
 let server = express();
 let bodyParser = require('body-parser');
+let cors = require('cors');
 const port = process.env.PORT || 3000;
 
 const ANGULAR_LINK = 'https://btaks-csfwi-angular.herokuapp.com';
 
 server.use(bodyParser.json());
+
+server.use(cors());
 
 //CORS headers
 server.use(function(req, res, next) {
@@ -26,8 +29,6 @@ server.use(function(req, res, next) {
 
     //next();
 });
-
-server.use(cors());
 
 server.get('/api', (req, res, next) => {
     res.send("Welcome to the Muzika API, every route starts with /api, example: /api/genres");
