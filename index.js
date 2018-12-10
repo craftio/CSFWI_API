@@ -6,10 +6,31 @@ let server = express();
 let bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
+const ANGULAR_LINK = 'https://btaks-csfwi-angular.herokuapp.com';
+
 server.use(bodyParser.json());
 
+//CORS headers
+server.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN || ANGULAR_LINK || 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    if (req.method === 'OPTIONS') {
+        res.status(200);
+        res.end();
+    } else {
+        next();
+    }
+
+    //next();
+});
+
+server.use(cors());
+
 server.get('/api', (req, res, next) => {
-    res.send("Welcome to the Muzika API, to make use of the routes add /api to the end of the url in the address bar. Example: /api/genres");
+    res.send("Welcome to the Muzika API, every route starts with /api, example: /api/genres");
 });
 
 // Load genre routes

@@ -23,7 +23,12 @@ let GenreSchema = new Schema({
     },
     popularity: {
         type: String,
-        enum: ['HIGH', 'MEDIUM', 'LOW', 'FRESH'],
+        enum: [
+            'HIGH',
+            'MEDIUM',
+            'LOW',
+            'FRESH'
+        ],
         default: 'FRESH'
     }
 });
