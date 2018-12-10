@@ -15,6 +15,7 @@ server.use(bodyParser.json());
 server.use(cors());
 
 //CORS headers
+/**
 server.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', ANGULAR_LINK);
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -30,6 +31,7 @@ server.use(function(req, res, next) {
 
     //next();
 });
+ */
 
 server.get('/api', (req, res, next) => {
     res.send("Welcome to the Muzika API, every route starts with /api, example: /api/genres");
