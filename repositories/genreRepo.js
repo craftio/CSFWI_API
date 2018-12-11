@@ -66,16 +66,10 @@ module.exports = class GenresRepo {
      * @param name
      * @param res
      */
-    static getGenresByName(name, res) {
-        Genre.find({ name: { $regex: name }})
-            .then((genres) => {
-                let genreArray = [];
-                for (let genre of genres) {
-                    genreArray.push({
-                        'name': genre.name
-                    })
-                }
-                res.status(200).json({'genres': genreArray});
+    static getGenreByName(name, res) {
+        Genre.findOne({ name: name})
+            .then((genre) => {
+                res.status(200).json({genre});
             })
             .catch(() => {
                 res.status(404).json(new jsonModel());
