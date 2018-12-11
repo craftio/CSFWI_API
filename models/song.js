@@ -17,7 +17,7 @@ let SongSchema = new Schema({
 });
 
 var autoPopulate = function(next) {
-    this.populate('artist genre');
+    this.populate('artists genre');
     next();
 };
 
