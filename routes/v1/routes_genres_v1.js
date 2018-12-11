@@ -41,7 +41,7 @@ server.get('/genres', (req, res) => {
 
     if (NorU(_name)) {
         try {
-            genreRepo.getGenreByName(_name, res);
+            genreRepo.getOneGenreByName(_name, res);
         } catch (error) {
             res.json(error);
         }
