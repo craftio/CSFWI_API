@@ -55,16 +55,10 @@ module.exports = class SongRepo {
             });
     }
 
-    static getSongsByName(name, res) {
-        Song.find({ name: { $regex: name }})
-            .then((songs) => {
-                let songArray = [];
-                for (let song of songs) {
-                    songArray.push({
-                        'name': song.name
-                    })
-                }
-                res.status(200).json({'songs': songArray});
+    static getSongByName(name, res) {
+        Song.findOne({ name: name})
+            .then((song) => {
+                res.status(200).json({song});
             })
             .catch(() => {
                 res.status(404).json(new jsonModel());

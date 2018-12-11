@@ -49,16 +49,10 @@ module.exports = class ArtistRepo {
             });
     }
 
-    static getArtistsByName(name, res) {
-        Artist.find({ name: { $regex: name }})
-            .then((artists) => {
-                let artistArray = [];
-                for (let artist of artists) {
-                    artistArray.push({
-                        'name': artist.name
-                    })
-                }
-                res.status(200).json({'artists': artistArray});
+    static getArtistByName(name, res) {
+        Artist.findOne({ name: name })
+            .then((artist) => {
+                res.status(200).json({artist});
             })
             .catch(() => {
                 res.status(404).json(new jsonModel());

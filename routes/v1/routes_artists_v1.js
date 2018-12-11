@@ -45,7 +45,7 @@ server.get('/artists', (req, res) => {
 
     if (NorU(_name)) {
         try {
-            artistRepo.getArtistsByName(_name, res);
+            artistRepo.getArtistByName(_name, res);
         } catch (error) {
             res.json(error);
         }
