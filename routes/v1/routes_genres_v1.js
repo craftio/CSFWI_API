@@ -54,6 +54,16 @@ server.get('/genres', (req, res) => {
     }
 });
 
+server.get('/genres/:id', (req, res) => {
+    const _id = req.params.id;
+
+    try {
+        genreRepo.getGenreById(_id, res);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 // Check for null and/or undefined params.
 function NorU(param) {
     if (param !== null && param !== undefined) {

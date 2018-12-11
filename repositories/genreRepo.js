@@ -84,6 +84,20 @@ module.exports = class GenresRepo {
             });
     }
 
+    static getGenreById(id, res) {
+        Genre.findOne({ _id: id })
+            .then((genre) => {
+                if (NorU(genre)) {
+                    res.status(200).json({genre});
+                } else {
+                    res.status(404).json(new jsonModel());
+                }
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel());
+            });
+    }
+
     /**
      * GET specific genre (by name).
      *
