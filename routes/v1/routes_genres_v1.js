@@ -54,11 +54,21 @@ server.get('/genres', (req, res) => {
     }
 });
 
-server.get('/genres/:id', (req, res) => {
-    const _id = req.params.id;
+server.get('/genres/:_id', (req, res) => {
+    const _id = req.params._id;
 
     try {
         genreRepo.getGenreById(_id, res);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+server.delete('/genres/:_id', (req, res) => {
+    const _id = req.params._id;
+
+    try {
+        genreRepo.deleteGenreById(_id, res);
     } catch (error) {
         res.json(error);
     }

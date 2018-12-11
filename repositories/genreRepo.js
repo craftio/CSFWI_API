@@ -84,8 +84,8 @@ module.exports = class GenresRepo {
             });
     }
 
-    static getGenreById(id, res) {
-        Genre.findOne({ _id: id })
+    static getGenreById(_id, res) {
+        Genre.findOne({ _id: _id })
             .then((genre) => {
                 if (NorU(genre)) {
                     res.status(200).json(genre);
@@ -131,6 +131,16 @@ module.exports = class GenresRepo {
             })
             .catch(() => {
                 res.status(500).json(new jsonModel('/api/genres', 'PUT', 500, 'The genre could not be updated (does it exist?)'));
+            })
+    }
+
+    static deleteGenreById(_id, res) {
+        Genre.findOneAndDelete({ _id: _id })
+            .then(() => {
+                res.status(200).json(new jsonModel('/api/genres/:_id'));
+            })
+            .catch(() => {
+                res.status(500).json(new jsonModel());
             })
     }
 
