@@ -88,7 +88,7 @@ module.exports = class GenresRepo {
         Genre.findOne({ _id: _id })
             .then((genre) => {
                 if (NorU(genre)) {
-                    res.status(200).json({genre});
+                    res.status(200).json(new jsonModel('/api/genres/:id', 'POST', 200, 'Succesfully retrieved genre.', genre));
                 } else {
                     res.status(404).json(new jsonModel());
                 }
