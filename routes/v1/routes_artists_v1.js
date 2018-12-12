@@ -113,7 +113,7 @@ server.delete('/artists', (req, res) => {
     }
 });
 
-server.delete('/artists/:id', (req, res) => {
+server.delete('/artists/:_id', (req, res) => {
     const _id = req.params._id;
 
     try {
