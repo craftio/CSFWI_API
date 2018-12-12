@@ -1,6 +1,10 @@
 let express = require('express');
 let server = express.Router();
 
+const jwt = require('jsonwebtoken');
+const TOKEN_KEY = require('../../connections/token');
+const checkToken = require('../../connections/checkToken');
+
 let jsonModel = require('../../models/jsonResponseModel');
 let mongoose = require('mongoose');
 let genreRepo = require('../../repositories/genreRepo');
@@ -54,14 +58,20 @@ server.get('/genres', (req, res) => {
     }
 });
 
-server.get('/genres/:_id', (req, res) => {
-    const _id = req.params._id;
+server.get('/genres/:_id', checkToken, (req, res) => {
+    jwt.verify(req.token, TOKEN_KEY, (err) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            const _id = req.params._id;
 
-    try {
-        genreRepo.getGenreById(_id, res);
-    } catch (error) {
-        res.json(error);
-    }
+            try {
+                genreRepo.getGenreById(_id, res);
+            } catch (error) {
+                res.json(error);
+            }
+        }
+    });
 });
 
 server.put('/genres/:_id', (req, res) => {

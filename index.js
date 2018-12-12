@@ -37,6 +37,8 @@ server.get('/api', (req, res, next) => {
     res.send("Welcome to the Muzika API, every route starts with /api, example: /api/genres");
 });
 
+// Load authentication
+server.use('/', require('./routes/v1/routes_authenticate_v1'));
 // Load genre routes
 server.use('/api', require('./routes/v1/routes_genres_v1'));
 // Load artist routes

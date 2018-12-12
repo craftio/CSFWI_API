@@ -68,13 +68,19 @@ server.get('/songs/:_id', (req, res) => {
 });
 
 // UPDATE
-server.put('/songs/:id', (req, res) => {
-
+server.put('/songs/:_id', (req, res) => {
+    const _id = req.params._id;
 });
 
 // DELETE
-server.delete('/songs/:id', (req, res) => {
-    
+server.delete('/songs/:_id', (req, res) => {
+    const _id = req.params._id;
+
+    try {
+        songRepo.deleteSongById(_id, res);
+    } catch (error) {
+        res.json(error);
+    }
 });
 
 // Check for null and/or undefined params.
