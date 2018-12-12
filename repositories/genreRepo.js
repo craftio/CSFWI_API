@@ -124,8 +124,8 @@ module.exports = class GenresRepo {
      * @param params
      * @param res
      */
-    static updateGenre(params, res) {
-        Genre.findOneAndUpdate({ name: params[0] }, { $set: { name: params[1], description: params[2], origin: params[3], popularity: params[4] }})
+    static updateGenre(_id, params, res) {
+        Genre.findOneAndUpdate({ _id: _id }, { $set: { name: params[0], description: params[1], origin: params[2], popularity: params[3] }})
             .then(() => {
                 res.status(200).json(new jsonModel('/api/genres', 'PUT', 200, 'The genre was successfully updated.'));
             })

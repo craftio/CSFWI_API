@@ -64,6 +64,34 @@ server.get('/genres/:_id', (req, res) => {
     }
 });
 
+server.put('/genres/:_id', (req, res) => {
+    const _id = req.params._id;
+
+    let bodyParamArray = [
+        req.body.name,
+        req.body.description,
+        req.body.origin,
+        req.body.popularity
+    ];
+
+    let _noru = true;
+    bodyParamArray.forEach((param) => {
+        if (!NorU(param)) {
+            _noru = false;
+        }
+    });
+
+    try {
+        if (_noru) {
+            genreRepo.updateGenre(_id, bodyParamArray, res);
+        } else {
+            res.json(new jsonModel());
+        }
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 server.delete('/genres/:_id', (req, res) => {
     const _id = req.params._id;
 
