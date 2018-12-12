@@ -113,6 +113,16 @@ server.delete('/artists', (req, res) => {
     }
 });
 
+server.delete('/artists/:id', (req, res) => {
+    const _id = req.params._id;
+
+    try {
+        artistRepo.deleteArtistById(_id, res);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 /**
  * Function to check if an object has any sort of definition other than a type (empty like " " is a definition).
  *

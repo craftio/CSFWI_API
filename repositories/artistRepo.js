@@ -100,6 +100,16 @@ module.exports = class ArtistRepo {
             });
     }
 
+    static deleteArtistById(_id, res) {
+        Artist.findOneAndDelete({ _id: _id })
+            .then(() => {
+                res.status(200).json(new jsonModel('/api/artists/:id', 'DELETE', 200, 'Succesfully deleted artist.', null))
+            })
+            .catch(() => {
+                res.status(500).json(new jsonModel('/api/artists/:id', 'DELETE', 500, 'Failed to delete artist.', null))
+            })
+    }
+
     static deleteArtistByName(param, res) {
         Artist.findOneAndDelete({ name: param })
             .then(() => {
