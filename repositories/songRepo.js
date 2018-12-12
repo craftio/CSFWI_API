@@ -55,6 +55,16 @@ module.exports = class SongRepo {
             });
     }
 
+    static getSongById(_id, res) {
+        Song.findOne({ _id: _id })
+            .then((song) => {
+                res.status(200).json(new jsonModel('/api/songs/:id', 'GET', 200, 'Successfully retrieved song.', song))
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel('/api/songs/:id', 'GET', 404, 'Failed to retrieve song.', null))
+            })
+    }
+
     static getSongByName(name, res) {
         Song.findOne({ name: name})
             .then((song) => {

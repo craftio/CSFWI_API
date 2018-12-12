@@ -57,6 +57,16 @@ server.get('/songs', (req, res) => {
     }
 });
 
+server.get('/songs/:_id', (req, res) => {
+    const _id = req.params._id;
+
+    try {
+        songRepo.getSongById(_id, res);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 // UPDATE
 server.put('/songs/:id', (req, res) => {
 
