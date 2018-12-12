@@ -75,7 +75,7 @@ module.exports = class ArtistRepo {
     }
 
     static updateArtist(_id, params, res) {
-        Artist.findOneAndUpdate({ _id: _id }, { $set: { name: params[1], age: params[2] }})
+        Artist.findOneAndUpdate({ _id: _id }, { $set: { name: params[0], age: params[1] }})
             .then(() => {
                 res.status(200).json(new jsonModel('/api/artists', 'PUT', 200, 'The artist has been updated successfully.'));
             })
