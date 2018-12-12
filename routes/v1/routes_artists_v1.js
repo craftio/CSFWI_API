@@ -71,7 +71,10 @@ server.get('/artists/:_id', (req, res) => {
 /**
  * Route for UPDATE
  */
-server.put('/artists', (req, res) => {
+server.put('/artists/:_id', (req, res) => {
+    const _id = req.params._id;
+    const genre_id = req.body._id;
+
     const bodyParamArray = [
         req.body.name,
         req.body.age
@@ -86,7 +89,9 @@ server.put('/artists', (req, res) => {
 
     try {
         if (_noru) {
-            artistRepo.updateArtist(bodyParamArray, res);
+            artistRepo.updateArtist(_id, bodyParamArray, res);
+        } else if (NorU(genre_id)) {
+            artistRepo.addGenreToArtist(_id, genre_id, res);
         } else {
             res.json(new jsonModel());
         }

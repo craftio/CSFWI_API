@@ -74,13 +74,29 @@ module.exports = class ArtistRepo {
             });
     }
 
-    static updateArtist(params, res) {
-        Artist.findOneAndUpdate({ name: params[0] }, { $set: { name: params[1], age: params[2] }})
+    static updateArtist(_id, params, res) {
+        Artist.findOneAndUpdate({ _id: _id }, { $set: { name: params[1], age: params[2] }})
             .then(() => {
                 res.status(200).json(new jsonModel('/api/artists', 'PUT', 200, 'The artist has been updated successfully.'));
             })
             .catch(() => {
                 res.status(500).json(new jsonModel('/api/artists', 'PUT', 500, 'The artist could not be updated. (does it exists?)'));
+            });
+    }
+
+    static addGenreToArtist(_id, genre_id, res) {
+        Genre.findOne({ _id: genre_id })
+            .then((genre) => {
+                Artist.findOneAndUpdate({ _id: _id }, { $push: { genres: genre }})
+                    .then((artist) => {
+                        res.status(200).json(artist);
+                    })
+                    .catch(() => {
+                        res.status(500).json(new jsonModel());
+                    })
+            })
+            .catch(() => {
+                res.status(500).json(new jsonModel());
             });
     }
 
