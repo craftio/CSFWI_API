@@ -58,6 +58,16 @@ server.get('/artists', (req, res) => {
     }
 });
 
+server.get('/artists/:_id', (req, res) => {
+    const _id = req.params._id;
+
+    try {
+        artistRepo.getArtistById(_id, res);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 /**
  * Route for UPDATE
  */

@@ -1,5 +1,6 @@
 const Artist = require('../models/artist');
 const Genre = require('../models/genre');
+const NorU = require('../globalfunctions/noru');
 
 const jsonModel = require('../models/jsonResponseModel');
 
@@ -46,6 +47,20 @@ module.exports = class ArtistRepo {
             })
             .catch(() => {
                 res.status(404).json(new jsonModel());
+            });
+    }
+
+    static getArtistById(_id, res) {
+        Artist.findOne({ _id: _id })
+            .then((artist) => {
+                if (NorU(artist)) {
+                    res.status(200).json((artist));
+                } else {
+                    res.status(404).json(new jsonModel());
+                }
+            })
+            .catch(() => {
+                res.status(500).json(new jsonModel());
             });
     }
 
